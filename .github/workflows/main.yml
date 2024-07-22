@@ -3,26 +3,21 @@ name: SSH to GCP VM
 on:
   push:
     branches:
-      - main  # Atau branch yang Anda inginkan
+      - main  # Ganti dengan branch yang Anda inginkan
 
 jobs:
   ssh:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: 8850522686279101155  # Ganti dengan ID proyek GCP Anda
-        service_account_key: ${{ secrets.GCP_SA_KEY }}  # Kunci akun layanan dari Secrets
-        export_default_credentials: true
-
-    - name: SSH into VM
-      uses: google-github-actions/ssh-compute@v1
-      with:
-        zone: asia-southeast2-b
-        instance_name: tes-app
-        command: 'ls -la'  # Perintah yang ingin dijalankan di VM
+      - name: SSH to GCP VM
+        uses: google-github-actions/ssh-compute@v0
+        with:
+          instance_name: 'tes-app'  # Ganti dengan nama instance Anda
+          zone: 'asia-southeast2-b'  # Ganti dengan zona instance Anda
+          user: 'oem'  # Ganti dengan username Anda di VM
+          ssh_private_key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          command: 'ls -la /home'  # Perintah yang ingin Anda jalankan di VM
