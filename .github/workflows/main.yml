@@ -18,6 +18,6 @@ jobs:
         with:
           instance_name: 'tes-app'  # Ganti dengan nama instance Anda
           zone: 'asia-southeast2-b'  # Ganti dengan zona instance Anda
-          user: 'oem'  # Ganti dengan username Anda di VM
+          user: 'madolcheworld'  # Ganti dengan username Anda di VM
           ssh_private_key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           command: 'ls -la /home'  # Perintah yang ingin Anda jalankan di VM
