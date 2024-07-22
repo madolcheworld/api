@@ -1,23 +1,23 @@
-name: SSH to GCP VM
+name: Deploy to GCP
 
 on:
   push:
     branches:
-      - main  # Ganti dengan branch yang Anda inginkan
+      - main
 
 jobs:
-  ssh:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: SSH to GCP VM
-        uses: google-github-actions/ssh-compute@v0
-        with:
-          instance_name: 'tes-app'  # Ganti dengan nama instance Anda
-          zone: 'asia-southeast2-b'  # Ganti dengan zona instance Anda
-          user: 'madolcheworld'  # Ganti dengan username Anda di VM
-          ssh_private_key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
-          command: 'ls -la /home'  # Perintah yang ingin Anda jalankan di VM
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Run SSH command
+      run: |
+        ssh -o StrictHostKeyChecking=no oem@34.34.219.89 "ls"
