@@ -16,13 +16,13 @@ jobs:
     - name: Setup Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
-        project_id: your-project-id  # Ganti dengan ID proyek GCP Anda
+        project_id: 8850522686279101155  # Ganti dengan ID proyek GCP Anda
         service_account_key: ${{ secrets.GCP_SA_KEY }}  # Kunci akun layanan dari Secrets
         export_default_credentials: true
 
     - name: SSH into VM
       uses: google-github-actions/ssh-compute@v1
       with:
-        zone: your-zone
-        instance_name: your-vm-instance-name
+        zone: asia-southeast2-b
+        instance_name: tes-app
         command: 'ls -la'  # Perintah yang ingin dijalankan di VM
